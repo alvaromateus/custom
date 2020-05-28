@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="sede_form">
+  <field name='name'>sede.form</field>
+  <field name='model'>sede</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de sedes'>
+      <group>
+          <field name='nome'/>
+          <field name='defensor_id'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='sede_tree' model='ir.ui.view'>
+  <field name='name'>sede.tree</field>
+  <field name='model'>sede</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem sedes'>
+          <field name='nome'/>
+          <field name='defensor_id'/>
+  </tree>
+  </field>
+</record>
+
+<!-- pesquisa -->
+<record id='sede_search' model='ir.ui.view'>
+  <field name='name'>sede.search</field>
+  <field name='model'>sede</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='pesquisa sedes'>
+	    <field name='nome'/>
+	  </search>
+  </field>
+</record>
+</data>
+</openerp>

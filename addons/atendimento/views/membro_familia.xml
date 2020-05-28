@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="membro_familia_form">
+  <field name='name'>membro_familia.form</field>
+  <field name='model'>membro_familia</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de membros da família'>
+      <group>
+          <field name='nome'/>
+          <field name='data_nascimento'/>
+          <field name='situacao'/>
+          <field name='grau_parentesco'/>
+          <field name='escolaridade'/>
+          <field name='situacao_empregaticia'/>
+          <field name='remuneracao'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='membro_familia_tree' model='ir.ui.view'>
+  <field name='name'>membro_familia.tree</field>
+  <field name='model'>membro_familia</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem membro família'>
+    <field name='nome'/>
+    <field name='data_nascimento'/>
+    <field name='situacao'/>
+    <field name='grau_parentesco'/>
+    <field name='escolaridade'/>
+    <field name='situacao_empregaticia'/>
+    <field name='remuneracao'/>
+  </tree>
+  </field>
+</record>
+</data>
+</openerp>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+        <!-- actions -->
+	<act_window id="lista_assistidos" name="Lista de assistidos" res_model="assistido" />
+
+	<act_window id="lista_atendimentos" name="Lista de atendimentos" res_model="atendimento" />
+
+	<act_window id="lista_atendimentos_telefonicos" name="Lista de atendimentos telefônicos" res_model="atendimento_telefonico" />
+	
+	<act_window id="lista_atendimentos_por_assistido" name="Lista de atendimentos" res_model="atendimento" domain="[('assistido_id','=',active_id)]" />
+
+	<act_window id="lista_atendimentos_por_defensor" name="Lista de atendimentos" res_model="atendimento" domain="[('defensor_id','=',active_id),('realizado','=','pendente')]" />
+
+	<act_window id="lista_atendimentos_por_assistido_pendencias" name="Lista de atendimentos" res_model="atendimento" domain="[('assistido_id','=',active_id),('realizado','=','pendente')]" />
+
+	<act_window id="lista_assistidos_antigos" name="Lista de assistidos" res_model="antigo" />
+
+	<act_window id="lista_defensores" name="Lista de defensores" res_model="defensor" />
+
+	<act_window id="lista_sedes" name="Lista de sedes" res_model="sede" />
+
+
+        <!-- itens de menu -->
+	<menuitem id="Cadastro_assistidos" name="Triagem" action="lista_assistidos" parent="" sequence="5" />
+
+	<menuitem id="Cadastro_atendimentos" name="Consulta Jurídica" action="lista_atendimentos" parent="" sequence="6" />
+	
+	<menuitem id="Cadastro_atendimentos_telefonicos" name="Atendimentos Telefônicos" action="lista_atendimentos_telefonicos" parent="" sequence="6" />
+
+	<menuitem id="Cadastro_assistidos_antigos" name="Assistidos (sistema antigo)" action="lista_assistidos_antigos" parent="" sequence="6" />
+
+	<menuitem id="pendencias" name="Pendências por Defensor" action="lista_defensores" sequence="7"/>
+
+	<menuitem id="manutencao" name="Manutenção"/>
+		<menuitem id="Cadastro_defensores" name="Defensores" action="lista_defensores" parent="manutencao" sequence="5" />
+		<menuitem id="cadastro_sedes" name="Sedes" action="lista_sedes" parent="manutencao" sequence="5" />
+
+  </data>
+</openerp>

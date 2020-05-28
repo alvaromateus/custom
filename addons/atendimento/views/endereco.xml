@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="endereco_form">
+  <field name='name'>endereco.form</field>
+  <field name='model'>endereco</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de endereços'>
+      <group>
+          <field name='tipo'/>
+          <field name='rua'/>
+          <field name='numero'/>
+          <field name='complemento'/>
+          <field name='cep'/>
+          <field name='bairro'/>
+          <field name='cidade'/>
+          <field name='estado'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='endereco_tree' model='ir.ui.view'>
+  <field name='name'>endereco.tree</field>
+  <field name='model'>endereco</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem endereços'>
+          <field name='tipo'/>
+          <field name='rua'/>
+          <field name='numero'/>
+          <field name='complemento'/>
+          <field name='cep'/>
+          <field name='bairro'/>
+          <field name='cidade'/>
+          <field name='estado'/>
+  </tree>
+  </field>
+</record>
+</data>
+</openerp>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="atendimento_telefonico_form">
+  <field name='name'>atendimento_telefonico.form</field>
+  <field name='model'>atendimento_telefonico</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+
+  <form string='Cadastro de Atendimento Telefônico'>
+      <group col='4'>
+
+	      <field name='assessor'/>
+  		  <field name='create_date' readonly='True'/>
+          <field name='assistido_id'/>
+          <field name='nome_solicitante'/>
+		  <field name='numero_processo'/>
+		  <field name='telefone'/>
+		</group>
+		<group>
+		  <field name='observacoes'/>
+		  <field name='realizado'/>
+		  <field name='info' style='max-width: 1150px;  width: 500px'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='atendimento_telefonico' model='ir.ui.view'>
+  <field name='name'>atendimento_telefonico.tree</field>
+  <field name='model'>atendimento_telefonico</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem diligencias'>
+	      <field name='assessor'/>
+		  <field name='create_date' readonly='True'/>
+          <field name='assistido_id'/>		  
+          <field name='nome_solicitante'/>
+		  <field name='numero_processo'/>
+		  <field name='telefone'/>
+		  <field name='observacoes'/>
+		  <field name='realizado'/>
+		  <field name='info'/>
+  </tree>
+  </field>
+</record>
+</data>
+</openerp>

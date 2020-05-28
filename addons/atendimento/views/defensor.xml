@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="defensor_form">
+  <field name='name'>defensor.form</field>
+  <field name='model'>defensor</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de defensores'>
+      <button type="action" string="Listar pendências" name="%(atendimento.lista_atendimentos_por_defensor)d" />
+      <group>
+          <field name='nome'/>
+          <field name='sede_id'/>
+<!--          <field name='estagio'/> -->
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='defensor_tree' model='ir.ui.view'>
+  <field name='name'>defensor.tree</field>
+  <field name='model'>defensor</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem defensores'>
+          <field name='nome'/>
+          <field name='sede_id'/>
+  </tree>
+  </field>
+</record>
+
+<!-- pesquisa -->
+<record id='defensor_search' model='ir.ui.view'>
+  <field name='name'>defensor.search</field>
+  <field name='model'>defensor</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='pesquisa defensores'>
+	    <field name='nome'/>
+	  </search>
+  </field>
+</record>
+</data>
+</openerp>

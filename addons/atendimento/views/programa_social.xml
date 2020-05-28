@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="programa_social_form">
+  <field name='name'>programa_social.form</field>
+  <field name='model'>programa_social</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de programas sociais'>
+      <group>
+          <field name='tipo'/>
+          <field name='valor'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='programa_social_tree' model='ir.ui.view'>
+  <field name='name'>programa_social.tree</field>
+  <field name='model'>programa_social</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem programas sociais'>
+          <field name='tipo'/>
+          <field name='valor'/>
+  </tree>
+  </field>
+</record>
+</data>
+</openerp>

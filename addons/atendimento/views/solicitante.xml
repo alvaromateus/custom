@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="solicitante_form">
+  <field name='name'>solicitante.form</field>
+  <field name='model'>solicitante</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de solicitante'>
+      <group>
+          <field name='nome'/>
+          <field name='cpf'/>
+          <field name='rg'/>
+          <field name='orgao_emissor'/>
+          <field name='vinculo_assistido'/>
+          <field name='email'/>
+          <field name='telefone'/>
+          <field name='endereco'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='solicitante_tree' model='ir.ui.view'>
+  <field name='name'>solicitante.tree</field>
+  <field name='model'>solicitante</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem solicitantes'>
+          <field name='nome'/>
+          <field name='cpf'/>
+          <field name='rg'/>
+          <field name='orgao_emissor'/>
+          <field name='vinculo_assistido'/>
+          <field name='email'/>
+  </tree>
+  </field>
+</record>
+
+<!-- pesquisa -->
+<record id='solicitante_search' model='ir.ui.view'>
+  <field name='name'>solicitante.search</field>
+  <field name='model'>solicitante</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='listagem solicitante'>
+	    <field name='nome'/>
+	  </search>
+  </field>
+</record>
+</data>
+</openerp>

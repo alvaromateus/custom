@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="assistido_form">
+  <field name='name'>assistido.form</field>
+  <field name='model'>assistido</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de assistidos'>
+      <button type="action" string="Histórico de atendimentos" name="%(atendimento.lista_atendimentos_por_assistido)d" />
+      <button type="action" string="Pendências" name="%(atendimento.lista_atendimentos_por_assistido_pendencias)d" />
+      <separator string="Dados pessoais do assistido" colspan="1"/>
+      <group col='4'>
+          <field name='id' string='Número de prontuário'/>
+	  <field name='data_cadastro' position="before" />
+          <field name='nome'/>
+          <field name='apelido'/>
+          <field name='cpf'/>
+          <field name='rg'/>
+          <field name='orgao_emissor'/>
+          <field name='data_nascimento'/>
+          <field name='genero'/>
+          <field name='estado_civil'/>
+          <field name='escolaridade'/>
+          <field name='naturalidade'/>
+          <field name='situacao_empregaticia'/>
+          <field name='profissao'/>
+          <field name='empregador'/>
+          <field name='previdencia'/>
+          <field name='email'/>
+          <field name='sede_id'/>
+
+          <field name='create_uid' readonly='True'/>
+          <field name='write_uid' readonly='True'/>
+		  <field name='__last_update' readonly='True' string='Última atualização em'/>
+		  
+      </group>
+      <group col='2'>
+          <field name='telefone'/>
+          <field name='endereco'/>
+          <field name='solicitante'/>
+      </group>
+      <group col='6'>
+          <field name='quantidade_atendimento'/>
+          <field name='canal_conhecimento'/>
+          <field name='processo_defensoria'/>
+      </group>
+      <group>
+          <separator string="Composição familiar" colspan="2"/>
+          <field name='membro_familia'/>
+
+          <field name='soma_remuneracao'/>
+          <field name='count_remuneracao'/>
+          <field name='renda_com_desconto'/>
+
+      </group>
+
+      <group col='4'>
+	  <field name='gasto_extra'/>
+          <field name='descricao_gasto'/>
+      </group>
+
+      <separator string="Situação habitacional" colspan="2"/>
+      <group col='4'>
+        
+          <field name='tipo_residencia'/>
+          <field name='situacao_residencia'/>
+          <field name='tipo_construcao'/>
+          <field name='valor_aluguel_financiamento'/>
+          <field name='observacao_residencia'/>
+      </group>
+      <separator string="Programas Sociais / Acesso à Rede de Serviços" colspan="2"/>
+      <group col='4'>
+          <field name='cadastro_unico'/>
+          <field name='familia_deficiencia'/>
+          <field name='descricao_deficiencia'/>
+          <field name='situacao_saude_mental_familia'/>
+          <field name='acompanhamento_familia'/>
+          <field name='programa_social'/>
+          <field name='sus'/>
+          <field name='unidade_basica'/>
+          <field name='usuario_drogas'/>
+          <field name='cras'/>
+      </group>
+      <group>
+          <field name='vinculos_familiares'/>
+      </group>
+      <separator string="Dados do Problema Jurídico" colspan="2"/>
+      <group col='4'>
+          <field name='deliberacao'/>
+          <field name='recurso'/>
+      </group>
+      <group>	
+          <field name='orientacao_encaminhamento'/>
+      </group>
+      <group col='4'>
+          <field name='tipo_atendimento_juridico'/>
+          <field name='area_judicial'/>
+          <field name='assunto1'/>
+          <field name='outro1'/>
+          <field name='assunto2'/>
+          <field name='outro2'/>
+      </group>
+      <group>
+          <field name='relato'/>
+      </group>
+
+      <group>
+          <separator string="Diligências Realizadas" colspan="2"/>
+          <field name='diligencia'/>
+      </group>
+
+    </form>
+    </field>
+</record>
+
+<!-- listagem -->
+<record id='assistido_tree' model='ir.ui.view'>
+  <field name='name'>assistido.tree</field>
+  <field name='model'>assistido</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem assistido'>
+    <field name='data_cadastro'/>
+    <field name='nome'/>
+    <field name='apelido'/>
+    <field name='nome_solicitante'/>
+    <field name='cpf'/>
+    <field name='rg'/>
+    <field name='escolaridade'/>
+    <field name='situacao_empregaticia'/>
+    <field name='profissao'/>
+    <field name='data_nascimento'/>
+    <field name='estado_civil'/>
+  </tree>
+  </field>
+</record>
+
+<!-- search -->
+<record id='assistido_search' model='ir.ui.view'>
+  <field name='name'>assistido.search</field>
+  <field name='model'>assistido</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='listagem assistido'>
+	    <field name='nome'/>
+	  </search>
+  </field>
+</record>
+
+<!-- impressao -->
+    <report
+        id="areport_session"
+        model="assistido"
+        string="Assistido"
+        name="atendimento.areport_session_view"
+        file="atendimento.areport_session"
+        report_type="qweb-pdf" />
+
+    <template id="areport_session_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="report.external_layout">
+                    <div class="page">
+ 		        <h3><center>Formulário de triagem inicial</center></h3>
+			<p><b>Data de Cadastro:</b> <span t-field="doc.data_cadastro"/> </p>
+			<p><b>Nome:</b> <span t-field="doc.nome"/> </p>
+			<span t-if="doc.apelido "><p><b>Nome Social:</b> <span t-field="doc.apelido"/> </p></span>
+			<span t-if="doc.genero "><p><b>Gênero:</b> <span t-field="doc.genero"/> </p></span>
+			<span t-if="doc.data_nascimento"><p><b>Data de Nascimento:</b> <span t-field="doc.data_nascimento"/> </p></span>
+			<span t-if="doc.cpf"><p><b>CPF:</b> <span t-field="doc.cpf"/> </p></span>
+			<span t-if="doc.rg"><p><b>RG:</b> <span t-field="doc.rg"/> </p></span>
+			<span t-if="doc.orgao_emissor"><p><b>Órgão Emissor RG:</b> <span t-field="doc.orgao_emissor"/> </p></span>
+
+			<span t-if="doc.naturalidade"><p><b>Naturalidade:</b> <span t-field="doc.naturalidade"/> </p></span>
+			<span t-if="doc.estado_civil"><p><b>Estado Civil:</b> <span t-field="doc.estado_civil"/> </p></span>
+			<span t-if="doc.escolaridade"><p><b>Escolaridade:</b> <span t-field="doc.escolaridade"/> </p></span>
+			<span t-if="doc.situacao_empregaticia"><p><b>Situação Empregatícia:</b> <span t-field="doc.situacao_empregaticia"/> </p></span>
+			<span t-if="doc.profissao"><p><b>Profissão:</b> <span t-field="doc.profissao"/> </p></span>
+			<span t-if="doc.empregador"><p><b>Empregador:</b> <span t-field="doc.empregador"/> </p></span>
+			<span t-if="doc.previdencia"><p><b>Contribui com a previdência?:</b> <span t-field="doc.previdencia"/> </p></span>
+			<span t-if="doc.email"><p><b>Email:</b> <span t-field="doc.email"/> </p></span>
+
+			<span t-if="doc.create_uid"><p><b>Responsável pela Triagem:</b> <span t-field="doc.create_uid"/> </p></span>
+
+			<h4><b>Endereço:</b></h4>
+			<div>
+				<table class="table table-condensed">
+					<tr style="font-weight:bold;">
+						<td>Rua</td>
+						<td>Número</td>
+						<td>Complemento</td>
+						<td>CEP</td>
+						<td>Bairro</td>
+						<td>Cidade</td>
+						<td>Estado</td>
+						<td>Tipo</td>
+					</tr>
+					<t t-foreach="doc.endereco" t-as="endereco">
+						<tr>
+							<td><span t-field="endereco.rua" /></td>
+							<td><span t-field="endereco.numero" /></td>
+							<td><span t-field="endereco.complemento" /></td>
+							<td><span t-field="endereco.cep" /></td>
+							<td><span t-field="endereco.bairro" /></td>
+							<td><span t-field="endereco.cidade" /></td>
+							<td><span t-field="endereco.estado" /></td>
+							<td><span t-field="endereco.tipo" /></td>
+						</tr>
+					</t>
+				</table>
+			</div>
+
+			<div style="margin-top:30px">
+			<h4><b>Composição Familiar:</b></h4>
+				<table class="table table-condensed">
+					<tr style="font-weight:bold;">
+						<td>Nome</td>
+						<td>Data de Nasc.</td>
+						<td>Situação</td>
+						<td>Grau de Paren.</td>
+						<td>Atividade Laboral</td>
+						<td>Renda</td>
+					</tr>
+					<t t-foreach="doc.membro_familia" t-as="familia">
+						<tr>
+							<td><span t-field="familia.nome" /></td>
+							<td><span t-field="familia.data_nascimento" /></td>
+							<td><span t-field="familia.situacao" /></td>
+							<td><span t-field="familia.grau_parentesco" /></td>
+							<td><span t-field="familia.situacao_empregaticia" /></td>
+							<td><span t-field="familia.remuneracao" /></td>
+						</tr>
+					</t>
+				</table>
+			<p><b>Renda Familiar:</b> <span t-field="doc.soma_remuneracao"/></p>
+			<p><b>Renda Familiar com Descontos:</b> <span t-field="doc.renda_com_desconto"/> </p>
+			<span t-if="doc.gasto_extra"><p><b>Gasto Extra:</b> <span t-field="doc.gasto_extra"/> </p></span>
+			<span t-if="doc.descricao_gasto"><p><b>Descrição do Gasto Extra:</b> <span t-field="doc.descricao_gasto"/> </p></span>
+			</div>
+
+			<div style="margin-top:30px">
+			<h4><b>Situação Habitacional:</b></h4>
+			<span t-if="doc.tipo_residencia"><p><b>Tipo de Residência:</b> <span t-field="doc.tipo_residencia"/> </p></span>
+			<span t-if="doc.situacao_residencia"><p><b>Situação da Residência:</b> <span t-field="doc.situacao_residencia"/> </p></span>
+			<span t-if="doc.tipo_construcao"><p><b>Tipo de Construção:</b> <span t-field="doc.tipo_construcao"/> </p></span>
+			<span t-if="doc.valor_aluguel_financiamento"><p><b>Valor Aluguel/Financiamento:</b> <span t-field="doc.valor_aluguel_financiamento"/> </p></span>
+			<span t-if="doc.observacao_residencia"><p><b>Observação:</b> <span t-field="doc.observacao_residencia"/> </p></span>
+			</div>
+
+
+
+			<div style="margin-top:30px">
+			<h4><b>Programas Sociais / Acesso à Rede de Serviços:</b></h4>
+			<span t-if="doc.cadastro_unico"><p><b>Possui Cadastro Único?</b> <span t-field="doc.cadastro_unico"/> </p></span>
+			<span t-if="doc.situacao_saude_mental_familia"><p><b>Situação da saúde mental da família?</b> <span t-field="doc.situacao_saude_mental_familia"/> </p></span>
+			<span t-if="doc.acompanhamento_familia"><p><b>Em acompanhamento?:</b> <span t-field="doc.acompanhamento_familia"/> </p></span>
+
+			<span t-if="doc.programa_social">
+				<h4><b>Programa Social:</b></h4>
+					<table class="table table-condensed">
+						<tr style="font-weight:bold;">
+							<td>Tipo</td>
+							<td>Valor</td>
+
+						</tr>
+						<t t-foreach="doc.programa_social" t-as="programa_social">
+							<tr>
+								<td><span t-field="programa_social.tipo" /></td>
+								<td><span t-field="programa_social.valor" /></td>
+							</tr>
+						</t>
+					</table>
+			</span>
+
+			<span t-if="doc.sus"><p><b>Acesso ao Sistema Único de Saúde?</b> <span t-field="doc.sus"/> </p></span>
+			<span t-if="doc.unidade_basica"><p><b>Unidade Básica de Saúde (referência):</b> <span t-field="doc.unidade_basica"/> </p></span>
+			<span t-if="doc.usuario_drogas"><p><b>Utilização de substâncias psicoativas (álcool e/ou outras drogas) por algum membro da família?</b> <span t-field="doc.usuario_drogas"/> </p></span>
+			<span t-if="doc.cras"><p><b>CRAS:</b> <span t-field="doc.cras"/> </p></span>
+			<span t-if="doc.vinculos_familiares"><p><b>Vínculos Familiares:</b> <span t-field="doc.vinculos_familiares"/> </p></span>
+			</div>
+
+			<div style="margin-top:30px">
+			<h4><b>Dados do Problema Jurídico:</b></h4>
+			<span t-if="doc.deliberacao"><p><b>Atende aos critérios da Deliberação Nº 019/2014 do CSDP?</b> <span t-field="doc.deliberacao"/> </p></span>
+			<span t-if="doc.recurso"><p><b>Recurso?</b> <span t-field="doc.recurso"/> </p></span>
+			<span t-if="doc.orientacao_encaminhamento"><p><b>Orientação e encaminhamento?</b> <span t-field="doc.orientacao_encaminhamento"/> </p></span>
+			<span t-if="doc.tipo_atendimento_juridico"><p><b>Tipo de atendimento jurídico:</b> <span t-field="doc.tipo_atendimento_juridico"/> </p></span>
+			<span t-if="doc.area_judicial"><p><b>Área Judicial:</b> <span t-field="doc.area_judicial"/> </p></span>
+			<span t-if="doc.assunto1"><p><b>Assunto 1:</b> <span t-field="doc.assunto1"/> </p></span>
+			<span t-if="doc.outro1"><p><b>Outro (Espec.):</b> <span t-field="doc.outro1"/> </p></span>
+			<span t-if="doc.assunto2"><p><b>Assunto2:</b> <span t-field="doc.assunto2"/> </p></span>
+			<span t-if="doc.outro2"><p><b>Outro (Espec.):</b> <span t-field="doc.assunto2"/> </p></span>
+
+			<span t-if="doc.relato"><p><b>Relato do Caso/ Observações/ Informações adicionais:</b> <span t-field="doc.relato"/> </p></span>
+			</div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</data>
+</openerp>

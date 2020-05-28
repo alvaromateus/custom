@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="diligencia_form">
+  <field name='name'>diligencia.form</field>
+  <field name='model'>diligencia</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+
+  <form string='Cadastro de Diligência'>
+      <group>
+          <field name='data'/>
+          <field name='descricao'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='diligencia' model='ir.ui.view'>
+  <field name='name'>diligencia.tree</field>
+  <field name='model'>diligencia</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem diligencias'>
+        <field name='data'/>
+        <field name='descricao'/>
+  </tree>
+  </field>
+</record>
+</data>
+</openerp>

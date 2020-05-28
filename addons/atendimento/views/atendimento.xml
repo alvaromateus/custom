@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="atendimento_form">
+  <field name='name'>atendimento.form</field>
+  <field name='model'>atendimento</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Atendimento Jurídico'>
+      <group col='4'>
+          <field name='data_cadastro'/>
+          <field name='numero_processo'/>
+          <field name='assistido_id'/>
+          <field name='realizado'/>
+          <field name='solicitante_id'/>
+<!--	  <field name='area_atendimento'/> -->
+
+	  <field name='area' widget="selection"/>
+
+<!--          <field name='procedimento_id'/> -->
+
+	  <field name='vara'/>
+
+	  <field name='assunto'/>
+<!--	  <field name='defensor'/>-->
+
+	  <field name='defensor_id'/>
+
+	  <field name='atendido_por'/>
+	  <field name='parte_colidente'/>
+	  <field name='cpf_colidente'/>
+	  <field name='endereco_parte_colidente'/>
+<!--          <field name='sede'/>-->
+          <field name='sede_id'/>
+
+<!--          <field name='procedimento' widget="selection"/> -->
+
+          <field name='create_uid' readonly='True'/>
+      </group>
+      <group>
+	  <field name='relato'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='atendimento_tree' model='ir.ui.view'>
+  <field name='name'>atendimento.tree</field>
+  <field name='model'>atendimento</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem atendimento'>
+          <field name='data_cadastro'/>
+          <field name='assistido_id'/>
+
+          <field name='numero_processo'/>
+	  <field name='area'/>
+          <field name='parte_colidente'/>
+	  <field name='nome_solicitante'/>
+	  <field name='assunto'/>
+	  <field name='defensor_id'/>
+  </tree>
+  </field>
+</record>
+
+<!-- search -->
+<record id='atendimento_search' model='ir.ui.view'>
+  <field name='name'>atendimento.search</field>
+  <field name='model'>atendimento</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='listagem assistido'>
+	    <field name='nome_assistido'/>
+	  </search>
+  </field>
+</record>
+
+<!-- impressão -->
+    <report
+        id="report_session"
+        model="atendimento"
+        string="Atendimento"
+        name="atendimento.report_session_view"
+        file="atendimento.report_session"
+        report_type="qweb-pdf" />
+
+    <template id="report_session_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="report.external_layout">
+                    <div class="page">
+           		<div class="col-xs-offset-0 col-xs-6">
+				<b>Nome do Assistido:</b> <p t-field="doc.assistido_id"/> 
+		                <span t-if="doc.solicitante_id "><b>Solicitante:</b> <p t-field="doc.solicitante_id"/></span>
+				<b>RG do Assistido:</b> <p t-field="doc.rg"/> 
+		                <b>Data de Cadastro:</b> <p t-field="doc.data_cadastro"/>
+		                <b>Numero do Processo:</b> <p t-field="doc.numero_processo"/>
+		                <span t-if="doc.email "><b>Email do Assistido:</b> <p t-field="doc.email"/></span>
+
+		                <span t-if="doc.telefone "><p><b>Telefone(s) do Assistido:</b></p> 
+					<t t-foreach="doc.assistido_id.telefone" t-as="item">
+						<t t-esc="item.telefone"/> 
+					</t>
+				</span>
+
+			</div>
+           		<div class="col-md-6">
+		                <b>Área do Atendimento:</b> <p t-field="doc.area"/>
+		                <b>Assunto:</b> <p t-field="doc.assunto"/>
+		                <b>Defensor:</b> <p t-field="doc.defensor_id"/>
+
+
+				<b>Responsável pelo Atendimento:</b> <p t-field="doc.create_uid"/> 
+
+		                <b>Situação:</b> <p t-field="doc.atendido_por"/>
+
+		                <span t-if="doc.solicitante_id.telefone"><p><b>Telefone(s) do Solicitante:</b></p> 
+					<t t-foreach="doc.solicitante_id.telefone" t-as="item">
+						<t t-esc="item.telefone"/> 
+					</t>
+				</span>
+
+		                <span t-if="doc.parte_colidente "><b>Parte Colidente:</b> <p t-field="doc.parte_colidente"/></span>
+		                <span t-if="doc.cpf_colidente "><b>CPF da Parte Colidente:</b> <p t-field="doc.cpf_colidente"/></span>
+			</div>
+
+	                <div class="col-xs-offset-0 col-xs-12" style="text-align:center;margin-top:25px;">
+		                <b>Resumo do Caso:</b> 
+			</div>
+	                <div class="col-xs-offset-0 col-xs-12" style="text-align:justify;">
+				<p t-field="doc.relato"/>
+			</div>
+	                <div class="col-xs-offset-0 col-xs-12" style="text-align:justify;margin-top:25px;">
+				<!-- Verifica se o atendimento é denegação para inclusão de texto padrão -->
+
+		                <span t-if="doc.atendido_por == 'negativa'">
+					<p t-field="doc.negativa_txt"/>
+					<span t-if="doc.solicitante_id "><p t-field="doc.nome_solicitante"/></span>
+					<span t-if="not doc.solicitante_id "><p t-field="doc.nome_assistido"/></span>
+			                <div t-field="doc.negativa_txt2"/>
+				</span>
+			</div>
+	                <div class="col-xs-offset-0 col-xs-12" style="text-align:center;margin-top:55px;">
+				<!-- Assinatura, verifica se há ou não solicitante para o atendimento -->
+		                <b>_______________________________________________</b> 
+				<span t-if="doc.solicitante_id "><p t-field="doc.solicitante_id"/></span>
+				<span t-if="not doc.solicitante_id "><p t-field="doc.assistido_id"/></span>
+			</div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</data>
+</openerp>

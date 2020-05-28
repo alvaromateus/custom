@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="malote_form">
+  <field name='name'>malote.form</field>
+  <field name='model'>malote</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de malotes'>
+      <separator string="Lista de remessa do malote" colspan="1"/>
+      <group col='2'>
+          <field name='create_uid' readonly='True'/>
+	  <field name='data_cadastro' position="before" />
+          <field name='sede'/>
+          <field name='para'/>
+	  <field name='confirmacao_recebimento'/>
+          <field name='data_confirmacao_recebimento'/>
+          <field name='item'/>          
+      </group>
+    </form>
+    </field>
+</record>
+
+<!-- listagem -->
+<record id='malote_tree' model='ir.ui.view'>
+  <field name='name'>malote.tree</field>
+  <field name='model'>malote</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem malotes'>
+	  <field name='data_cadastro' position="before" />
+          <field name='sede'/>
+          <field name='para'/>
+          <field name='confirmacao_recebimento'/>
+          <field name='data_confirmacao_recebimento'/>
+  </tree>
+  </field>
+</record>
+
+<!-- search -->
+<record id='assistido_search' model='ir.ui.view'>
+  <field name='name'>malote.search</field>
+  <field name='model'>malote</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='listagem assistido'>
+	    <field name='item'/>
+	  </search>
+  </field>
+</record>
+
+
+<!-- report -->
+    <report
+        id="report_session"
+        model="malote"
+        string="Malote"
+        name="malote.report_session_view"
+        file="malote.report_session"
+        report_type="qweb-pdf" />
+
+    <template id="report_session_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="report.external_layout">
+                    <div class="page">
+ 		        <h3><center><b>LISTA DE REMESSA DE MALOTE</b></center></h3>
+			<div>
+				<table class="table table">
+					<tr>
+						<td><b>Emitido por:</b> <span t-field="doc.create_uid"/> </td>
+						<td><b>Data:</b> <span t-field="doc.data_cadastro"/></td>
+					</tr>
+					<tr>
+						<td><b>Sede:</b> <span t-field="doc.sede"/>  </td>
+						<td><b>Para:</b> <span t-field="doc.para"/> </td>
+					</tr>
+				</table>
+			</div>
+
+
+			<h4><b><center>Lista de Documentos</center></b></h4>
+			<div style="margin-bottom:50px">
+				<table class="table table">
+					<tr style="font-weight:bold;">
+						<td>Item</td>
+						<td>Identificação do documento</td>
+						<td>Destino</td>
+					</tr>
+				<t t-foreach="doc.item" t-as="item">
+					<tr>
+				        	<td><span t-esc="item_index+1"/></td>
+						<td><span t-field="item.identificacao" /></td>
+						<td><span t-field="item.destino" /></td>
+					</tr>
+				</t>
+				</table>
+			</div>
+			<div style="margin-bottom:50px">
+				<p><b>Recebido por: ______________________________________ </b>  </p>
+				<p><b>Data: _____/______/___________</b>  </p>
+				<p><b>Observações: ______________________________________</b>  </p>
+			</div>
+			<p><b>Devolver assinada e datada</b>  </p>
+	
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</data>
+</openerp>

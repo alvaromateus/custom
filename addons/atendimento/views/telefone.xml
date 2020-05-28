@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="telefone_form">
+  <field name='name'>telefone.form</field>
+  <field name='model'>telefone</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de telefones'>
+      <group>
+          <field name='telefone'/>
+          <field name='info'/>
+          <field name='tipo'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='telefone_tree' model='ir.ui.view'>
+  <field name='name'>telefone.tree</field>
+  <field name='model'>telefone</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem telefones'>
+          <field name='telefone'/>
+          <field name='info'/>
+          <field name='tipo'/>
+  </tree>
+  </field>
+</record>
+</data>
+</openerp>

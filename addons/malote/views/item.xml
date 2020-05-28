@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="item_form">
+  <field name='name'>item.form</field>
+  <field name='model'>item</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de itens de malote'>
+      <separator string="Lista de Documentos" colspan="1"/>
+      <group col='4'>
+          <field name='malote_id'/>
+          <field name='destino'/>
+          <field name='identificacao'/>
+
+      </group>
+    </form>
+    </field>
+</record>
+
+<!-- listagem -->
+<record id='item_tree' model='ir.ui.view'>
+  <field name='name'>item.tree</field>
+  <field name='model'>item</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='listagem itens'>
+          <field name='destino'/>
+          <field name='identificacao'/>
+  </tree>
+  </field>
+</record>
+
+
+<!-- search -->
+<record id='item_search' model='ir.ui.view'>
+  <field name='name'>item.search</field>
+  <field name='model'>item</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='listagem item'>
+	    <field name='identificacao'/>
+	  </search>
+  </field>
+</record>
+
+</data>
+</openerp>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!-- formulário -->
+<record model="ir.ui.view" id="antigo_form">
+  <field name='name'>antigo.form</field>
+  <field name='model'>antigo</field>
+  <field name='type'>form</field>
+  <field name='arch' type='xml'>
+  <form string='Cadastro de assistidos (sistema antigo do cartório)'>
+      <group>
+          <field name='recnum'/>
+          <field name='ano_pront'/>
+          <field name='num_pront'/>
+          <field name='nome'/>
+          <field name='tipo_cliente'/>
+          <field name='data_cadastro'/>
+          <field name='identidade'/>
+          <field name='ender_resid'/>
+          <field name='ender_compl'/>
+          <field name='cidade_resid'/>
+          <field name='estado'/>
+          <field name='fone_contato'/>
+          <field name='data_nascimento'/>
+          <field name='profissao'/>
+          <field name='cod_reg'/>
+          <field name='cep'/>
+      </group>
+    </form>
+  </field>
+</record>
+
+<!-- listagem -->
+<record id='antigo_tree' model='ir.ui.view'>
+  <field name='name'>antigo.tree</field>
+  <field name='model'>antigo</field>
+  <field name='type'>tree</field>
+  <field name='arch' type='xml'>
+  <tree string='Listagem de assistidos (sistema antigo do cartório)'>
+          <field name='nome'/>
+          <field name='ano_pront'/>
+          <field name='num_pront'/>
+          <field name='data_cadastro'/>
+          <field name='identidade'/>
+          <field name='ender_resid'/>
+          <field name='ender_compl'/>
+          <field name='cidade_resid'/>
+          <field name='estado'/>
+          <field name='fone_contato'/>
+          <field name='fone_contato'/>
+          <field name='data_nascimento'/>
+          <field name='profissao'/>
+  </tree>
+  </field>
+</record>
+
+
+<!-- search -->
+<record id='antigo_search' model='ir.ui.view'>
+  <field name='name'>antigo.search</field>
+  <field name='model'>antigo</field>
+  <field name='type'>search</field>
+  <field name='arch' type='xml'>
+	  <search string='listagem antigo'>
+	    <field name='nome'/>
+	  </search>
+  </field>
+</record>
+</data>
+</openerp>
